@@ -8,24 +8,41 @@ export interface Course {
     courseTitle: string;
     courseDuration: string;
     courseAccess: string;
-    courseCurriculum: string[][];
+    courseCurriculum: any;
     courseFaq: string[];
     courseAnnouncement: string;
     courseVideoNums: number;
     courseLevel: string;
 }
 
-export const CourseSchema = new Schema<Course>(
+const lessonSchema = new Schema({
+    title: String,
+    textLesson: String,
+    duration: String,
+    videoLesson: String,
+    material: String
+});
+
+const sectionSchema = new Schema({
+    sectionTitle: String,
+    lessons: [lessonSchema]  // Embed the lesson schema as an array
+});
+
+const curriculumSchema = new Schema({
+    sections: [sectionSchema]  // Embed the section schema as an array
+});
+
+const CourseSchema = new Schema(
     {
         courseDesImg: {type: String, required: true},
         courseDesText: {type: String, required: true},
         courseCategory: {type: String, required: true},
-        courseNewCat: {type: String, required: true},
+        courseNewCat: {type: String},
         courseTitle: {type: String, required: true},
         courseDuration: {type: String, required: true},
         courseAccess: {type: String, required: true},
-        courseCurriculum: {type: [[String]], required: true},
-        courseFaq: {type: [String], required: true},
+        courseCurriculum: [curriculumSchema],
+        courseFaq: {type: [String]},
         courseAnnouncement: {type: String, required: true},
         courseLevel: {type: String, required: true},
 
@@ -44,4 +61,8 @@ export const CourseSchema = new Schema<Course>(
     }
 )
 
-export const CourseModel = model<Course>('course', CourseSchema)
+  export const Lesson = model('Lesson', lessonSchema);
+  export const Section = model('Section', sectionSchema);
+  export const Curriculum = model('Curriculum', curriculumSchema);
+
+  export const CourseModel = model('course', CourseSchema)
