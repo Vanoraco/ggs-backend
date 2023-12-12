@@ -34,17 +34,17 @@ const curriculumSchema = new Schema({
 
 const CourseSchema = new Schema(
     {
-        courseDesImg: {type: String, required: true},
-        courseDesText: {type: String, required: true},
-        courseCategory: {type: String, required: true},
+        courseDesImg: {type: String},
+        courseDesText: {type: String},
+        courseCategory: {type: String},
         courseNewCat: {type: String},
-        courseTitle: {type: String, required: true},
-        courseDuration: {type: String, required: true},
-        courseAccess: {type: String, required: true},
-        courseCurriculum: [curriculumSchema],
+        courseTitle: {type: String},
+        courseDuration: {type: String},
+        courseAccess: {type: String},
+        courseCurriculum: [],
         courseFaq: {type: [String]},
-        courseAnnouncement: {type: String, required: true},
-        courseLevel: {type: String, required: true},
+        courseAnnouncement: {type: String},
+        courseLevel: {type: String},
 
     }, {
 
