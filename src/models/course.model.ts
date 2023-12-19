@@ -15,22 +15,6 @@ export interface Course {
     courseLevel: string;
 }
 
-const lessonSchema = new Schema({
-    title: String,
-    textLesson: String,
-    duration: String,
-    videoLesson: String,
-    material: String
-});
-
-const sectionSchema = new Schema({
-    sectionTitle: String,
-    lessons: [lessonSchema]  // Embed the lesson schema as an array
-});
-
-const curriculumSchema = new Schema({
-    sections: [sectionSchema]  // Embed the section schema as an array
-});
 
 const CourseSchema = new Schema(
     {
@@ -60,9 +44,5 @@ const CourseSchema = new Schema(
         
     }
 )
-
-  export const Lesson = model('Lesson', lessonSchema);
-  export const Section = model('Section', sectionSchema);
-  export const Curriculum = model('Curriculum', curriculumSchema);
 
   export const CourseModel = model('course', CourseSchema)
